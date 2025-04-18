@@ -1,17 +1,23 @@
 import subprocess
 import time
-import os
+import webbrowser
 
-# Start the backend server
+# ✅ Start FastAPI backend
 backend = subprocess.Popen(
-    ["uvicorn", "api.app:app", "--host", "0.0.0.0", "--port", "8000"]
+    ["uvicorn", "api.app:app", "--host", "0.0.0.0", "--port", "8000"],
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.DEVNULL
 )
 
-# Give it some time to start
+# Wait for backend to spin up
 time.sleep(5)
 
-# Start the Streamlit app
-subprocess.run(["streamlit", "run", "frontend/app.py"])
+# Open browser to Streamlit manually
+webbrowser.open("http://localhost:8501")
 
-# When Streamlit exits, kill the backend
+# Start Streamlit frontend
+subprocess.run(["streamlit", "run", "frontend/app.py"])
+# NOTE: this blocks until Streamlit exits
+
+# Kill backend when Streamlit closes
 backend.terminate()
