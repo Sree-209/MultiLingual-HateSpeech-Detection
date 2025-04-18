@@ -1,9 +1,13 @@
+import streamlit as st
+
+# ✅ Must be the very first Streamlit command
+st.set_page_config(page_title="Hate Speech Detector", layout="centered")
+
 import subprocess
 import time
 import requests
-import streamlit as st
 
-# Automatically start FastAPI backend on Streamlit startup
+# Automatically start FastAPI backend
 @st.cache_resource
 def start_backend():
     process = subprocess.Popen(
@@ -11,15 +15,12 @@ def start_backend():
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
-    time.sleep(2)  # wait for backend to spin up
+    time.sleep(2)  # wait for backend to start
     return process
 
-# Start backend once (cached across reruns)
 start_backend()
 
 # Streamlit UI
-st.set_page_config(page_title="Hate Speech Detector", layout="centered")
-
 st.title("Multilingual Hate Speech Detector")
 st.markdown("Enter a code-mixed (Hinglish) comment to check if it's **Hate** or **Non-Hate**.")
 
