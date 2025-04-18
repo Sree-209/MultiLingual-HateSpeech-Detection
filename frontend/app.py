@@ -1,6 +1,5 @@
 import streamlit as st
 
-# ✅ Must be the very first Streamlit command
 st.set_page_config(page_title="Hate Speech Detector", layout="centered")
 
 import subprocess
@@ -10,13 +9,11 @@ import requests
 # Automatically start FastAPI backend
 @st.cache_resource
 def start_backend():
-    process = subprocess.Popen(
+    return subprocess.Popen(
         ["uvicorn", "api.app:app", "--host", "0.0.0.0", "--port", "8000"],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
-    time.sleep(2)  # wait for backend to start
-    return process
 
 start_backend()
 
