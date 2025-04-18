@@ -1,0 +1,24 @@
+# Ignore all data
+data/
+
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+
+# Ignore notebooks' checkpoints
+.ipynb_checkpoints/
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore macOS system file
+.DS_Store
+
+# Ignore Streamlit cache
+.streamlit/
+
+# Ignore model checkpoints if not needed
+*.pt
+*.pth
+*.h5
